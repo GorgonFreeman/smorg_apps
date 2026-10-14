@@ -1,0 +1,27 @@
+{
+  "name": "@smorg/server",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=../../.env src/index.ts",
+    "build": "tsc --noEmit",
+    "start": "tsx --env-file=../../.env src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@foxtware/mineral": "^1.0.8",
+    "@hono/node-server": "^1.19.1",
+    "@smorg/core": "workspace:*",
+    "@smorg/db": "workspace:*",
+    "@smorg/ui": "workspace:*",
+    "hono": "^4.9.8",
+    "nodemailer": "^7.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.6",
+    "@types/nodemailer": "^7.0.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

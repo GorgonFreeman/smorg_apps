@@ -430,8 +430,9 @@ Workspace packages depend on `@foxtware/mineral` from npm for `customFetch` (and
 - Pooler vs. direct connection for the migration job (the direct connection is IPv6-only).
 - Future mandatory tutorial that installs Core, and what it contains.
 - Whether to use Kysely or plain `pg` queries.
-- Exact `handle` charset rules (propose: `[a-z0-9._-]+` after lowercasing).
-- How to forward `credentials: 'include'` through mineral `customFetch` if not supported upstream yet.
+- ~~Exact `handle` charset rules~~ → `[a-z0-9._-]+` after lowercasing (implemented).
+- ~~Elasticsearch product~~ → Postgres `ILIKE` + `pg_trgm` (confirmed).
+- Browser `customFetch`: credentials-aware wrapper in `@smorg/ui` (mineral's Node `customFetch` used server-side).
 - Verify 50% opacity contrast in the DaisyUI themes chosen.
 - Confirm Tailwind and DaisyUI versions, and test that theme variables and `@property` rules behave correctly with the stylesheet loaded both globally and in shadow roots.
 - Decide how to handle forms (self-contained per component vs. `ElementInternals`) as the first real forms are built in Core.

@@ -1,0 +1,6 @@
+/* Compiled Tailwind/DaisyUI sheet is produced by the shell build and
+   injected into shadow roots via SmorgElement. For Vite ?inline imports
+   during shell/app development, re-export the shell stylesheet entry. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

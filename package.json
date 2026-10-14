@@ -1,0 +1,23 @@
+{
+  "name": "smorg-apps",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @smorg/server --filter @smorg/shell dev",
+    "dev:server": "pnpm --filter @smorg/server dev",
+    "dev:shell": "pnpm --filter @smorg/shell dev",
+    "build": "pnpm --filter @smorg/shell build && pnpm --filter @smorg/server build",
+    "start": "pnpm --filter @smorg/server start",
+    "migrate": "pnpm --filter @smorg/db migrate",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.26.2",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

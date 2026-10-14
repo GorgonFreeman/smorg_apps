@@ -3,3 +3,7 @@
 .env.*
 !.env.example
 node_modules/
+dist/
+*.tsbuildinfo
+.turbo/
+coverage/
