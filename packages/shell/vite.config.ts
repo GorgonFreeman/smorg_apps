@@ -26,6 +26,10 @@ export default defineConfig({
         find: '@smorg/core/client',
         replacement: path.resolve(__dirname, '../../apps/core/client/index.ts'),
       },
+      {
+        find: '@smorg/itinerarium/client',
+        replacement: path.resolve(__dirname, '../../apps/itinerarium/client/index.ts'),
+      },
     ],
   },
   build: {

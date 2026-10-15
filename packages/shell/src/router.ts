@@ -4,6 +4,7 @@ export type Route =
   | { name: 'gallery' }
   | { name: 'consent', slug: string }
   | { name: 'app', slug: string, rest: string }
+  | { name: 'publicItinerarium', token: string }
 
 export function parseRoute(pathname = window.location.pathname): Route {
   if (pathname === '/login') {
@@ -14,6 +15,13 @@ export function parseRoute(pathname = window.location.pathname): Route {
   }
   if (pathname === '/gallery') {
     return { name: 'gallery' }
+  }
+  const publicItinerarium = pathname.match(/^\/p\/itinerarium\/([^/]+)\/?$/)
+  if (publicItinerarium) {
+    return {
+      name: 'publicItinerarium',
+      token: decodeURIComponent(publicItinerarium[1]),
+    }
   }
   const consent = pathname.match(/^\/gallery\/([^/]+)\/consent\/?$/)
   if (consent) {

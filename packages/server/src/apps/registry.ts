@@ -1,5 +1,6 @@
 import type { TxClient } from '@smorg/db'
 import coreManifest from '@smorg/core/manifest'
+import itinerariumManifest from '@smorg/itinerarium/manifest'
 
 export type AppManifest = {
   slug: string
@@ -10,7 +11,7 @@ export type AppManifest = {
   migrations?: string
 }
 
-export const manifests: AppManifest[] = [coreManifest]
+export const manifests: AppManifest[] = [coreManifest, itinerariumManifest]
 
 export async function syncAppsRegistry(client: TxClient): Promise<void> {
   for (const manifest of manifests) {

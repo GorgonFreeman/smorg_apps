@@ -3,6 +3,7 @@ import { serveStatic } from '@hono/node-server/serve-static'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createCoreRouter } from '@smorg/core/server'
+import { createItinerariumRouter, publicTripRoutes } from '@smorg/itinerarium/server'
 import type { AppConfig } from './config.js'
 import { createMailer } from './mailer.js'
 import { csrfOrigin } from './middleware/csrf.js'
@@ -33,6 +34,17 @@ export function createApp(config: AppConfig) {
   core.use('*', requireInstalled('core'))
   core.route('/', createCoreRouter())
   app.route('/api/apps/core', core)
+
+  const itinerarium = new Hono()
+  itinerarium.use('*', requireAuth(config.sessionHmacSecret))
+  itinerarium.use('*', requireInstalled('itinerarium'))
+  itinerarium.route('/', createItinerariumRouter({
+    sessionHmacSecret: config.sessionHmacSecret,
+    appOrigin: config.appOrigin,
+  }))
+  app.route('/api/apps/itinerarium', itinerarium)
+
+  app.route('/api/public/itinerarium', publicTripRoutes())
 
   app.get('/api/health', (c) => c.json({ ok: true, data: { status: 'up' } }))
 

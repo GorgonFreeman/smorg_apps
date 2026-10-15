@@ -31,5 +31,6 @@ packages/db      pool, RLS tx helper, migrations
 packages/server  Hono API (auth, install, mounts apps)
 packages/ui      SmorgElement + mineral-shaped customFetch
 packages/shell   Lit Hub / Gallery / login
-apps/core        People CRUD
+apps/core         People CRUD
+apps/itinerarium  Trip timeline planner
 ```

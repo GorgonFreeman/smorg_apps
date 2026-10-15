@@ -20,4 +20,8 @@ await runMigrations(ownerUrl, [
     app: 'core',
     dir: path.join(root, 'apps/core/migrations'),
   },
+  {
+    app: 'itinerarium',
+    dir: path.join(root, 'apps/itinerarium/migrations'),
+  },
 ])

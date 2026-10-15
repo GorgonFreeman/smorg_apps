@@ -9,6 +9,7 @@ type AppModule = {
 
 const loaders: Record<string, () => Promise<AppModule>> = {
   core: () => import('@smorg/core/client'),
+  itinerarium: () => import('@smorg/itinerarium/client'),
 }
 
 @customElement('smorg-app-host')

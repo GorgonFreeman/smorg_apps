@@ -11,6 +11,7 @@ import './pages/hub_page.ts'
 import './pages/gallery_page.ts'
 import './pages/consent_page.ts'
 import './pages/app_host.ts'
+import './pages/public_itinerarium_page.ts'
 
 @customElement('smorg-shell')
 export class ShellApp extends SmorgElement {
@@ -43,7 +44,8 @@ export class ShellApp extends SmorgElement {
     const me = await getMe()
     this.user = me.ok && me.data ? me.data : null
     const onLogin = this.route.name === 'login'
-    if (!this.user && !onLogin) {
+    const publicRoute = this.route.name === 'publicItinerarium'
+    if (!this.user && !onLogin && !publicRoute) {
       navigate('/login')
       this.route = parseRoute()
       return
@@ -72,7 +74,9 @@ export class ShellApp extends SmorgElement {
       return html`<div class="p-8">Loading…</div>`
     }
 
-    const showNav = this.user && this.route.name !== 'login'
+    const showNav = this.user
+      && this.route.name !== 'login'
+      && this.route.name !== 'publicItinerarium'
 
     return html`
       <div class="min-h-screen flex flex-col">
@@ -117,6 +121,10 @@ export class ShellApp extends SmorgElement {
             slug=${ this.route.slug }
             .user=${ this.user }
           ></smorg-app-host>
+        `
+      case 'publicItinerarium':
+        return html`
+          <smorg-public-itinerarium-page token=${ this.route.token }></smorg-public-itinerarium-page>
         `
       default:
         return nothing
