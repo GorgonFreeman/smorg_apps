@@ -16,6 +16,15 @@ See [docs/spec.md](docs/spec.md).
 
 OTP codes log to the server console when `SMTP_HOST` is empty.
 
+## Deploy (Cloud Run)
+
+1. Copy prod env: `cp .env.production.example .env.production`
+2. Fill Supabase pooler URLs (`DATABASE_URL` / `DATABASE_OWNER_URL`), `SESSION_HMAC_SECRET`, and Gmail `SMTP_*` (see example).
+3. `gcloud auth login` (project `foxtware`, region `australia-southeast1`).
+4. `pnpm run deploy` — builds the image (Cloud Build), syncs Secret Manager, runs the migrate job, deploys Cloud Run. Prints the live URL.
+
+Use `pnpm run deploy` (not bare `pnpm deploy`; that is a different pnpm CLI command).
+
 ## Scripts
 
 | Command | What |
@@ -23,6 +32,7 @@ OTP codes log to the server console when `SMTP_HOST` is empty.
 | `pnpm dev` | API + Vite shell together |
 | `pnpm migrate` | Apply platform + app SQL migrations |
 | `pnpm build` | Build shell (served by API in production) |
+| `pnpm run deploy` | Production deploy to Cloud Run |
 
 ## Layout
 

@@ -9,6 +9,7 @@
     "build": "pnpm --filter @smorg/shell build && pnpm --filter @smorg/server build",
     "start": "pnpm --filter @smorg/server start",
     "migrate": "pnpm --filter @smorg/db migrate",
+    "deploy": "bash ./scripts/deploy.sh",
     "typecheck": "pnpm -r typecheck"
   },
   "engines": {

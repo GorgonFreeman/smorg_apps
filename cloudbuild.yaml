@@ -1,0 +1,16 @@
+# Used by scripts/deploy.sh — tags image as :$TAG and :latest
+substitutions:
+  _IMAGE: ''
+  _TAG: latest
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_IMAGE}:${_TAG}
+      - -t
+      - ${_IMAGE}:latest
+      - .
+images:
+  - ${_IMAGE}:${_TAG}
+  - ${_IMAGE}:latest
