@@ -11,15 +11,20 @@ type ShareRow = {
   revoked_at: Date | null
 }
 
-function mapShare(row: ShareRow, appOrigin: string) {
+function mapShare(row: ShareRow, publicOrigin: string) {
   return {
     id: row.id,
     tripId: row.trip_id,
     token: row.token,
-    url: `${ appOrigin }/p/itinerarium/${ row.token }`,
+    url: `${ publicOrigin }/p/itinerarium/${ row.token }`,
     createdAt: new Date(row.created_at).toISOString(),
     revokedAt: row.revoked_at ? new Date(row.revoked_at).toISOString() : null,
   }
+}
+
+function publicOrigin(c: { req: { header: (name: string) => string | undefined } }, fallback: string) {
+  const origin = c.req.header('origin')
+  return origin || fallback
 }
 
 export function shareRoutes(appOrigin: string) {
@@ -47,7 +52,7 @@ export function shareRoutes(appOrigin: string) {
     if (row.kind === 'missing') {
       return send(c, fail('NOT_FOUND', 'Trip not found', { statusCode: 404 }))
     }
-    return send(c, ok(row.row ? mapShare(row.row, appOrigin) : null))
+    return send(c, ok(row.row ? mapShare(row.row, publicOrigin(c, appOrigin)) : null))
   })
 
   app.post('/trips/:tripId/share', async (c) => {
@@ -80,7 +85,7 @@ export function shareRoutes(appOrigin: string) {
     if (!row) {
       return send(c, fail('NOT_FOUND', 'Trip not found', { statusCode: 404 }))
     }
-    return send(c, ok(mapShare(row, appOrigin)))
+    return send(c, ok(mapShare(row, publicOrigin(c, appOrigin))))
   })
 
   app.delete('/trips/:tripId/share', async (c) => {

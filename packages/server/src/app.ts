@@ -19,7 +19,7 @@ export function createApp(config: AppConfig) {
   const mailer = createMailer(config)
   const app = new Hono()
 
-  app.use('/api/*', csrfOrigin(config.appOrigin))
+  app.use('/api/*', csrfOrigin(config.appOrigin, config.nodeEnv))
 
   app.route('/api/auth', authRoutes({
     secret: config.sessionHmacSecret,
